@@ -1,7 +1,12 @@
+# System constants
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
+
+# Player character constants
+PLAYER_TURN_SPEED = 300
 PLAYER_RADIUS = 20
 
+# Asteroids and enviromental constants
 ASTEROID_MIN_RADIUS = 20
 ASTEROID_KINDS = 3
 ASTEROID_SPAWN_RATE = 0.8  # seconds
