@@ -29,7 +29,7 @@ def main():
     asteroidfield_init = asteroidfield.AsteroidField()
     game_clock = pygame.time.Clock()
     dt = 0
-    
+
     # game_active_flag is irrelevant, just to keep while loop running, use pygame.QUIT to exit game.
     while game_active_flag == True:
         for event in pygame.event.get():
@@ -46,6 +46,10 @@ def main():
             if a.collision_check(player_sprite):
                print("Game over!")
                sys.exit()
+            
+            for bullet in shots:
+                if a.collision_check(bullet):
+                    a.split()
 
         for d in drawable:
             d.draw(screen)
