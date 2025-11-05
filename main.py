@@ -1,15 +1,27 @@
 import pygame
 from constants import *
 import player
+import asteroid
+import asteroidfield
 
 def main():
     pygame.init()
 
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     game_active_flag = True
 
+    # Class containers to more efficently update all instances of a given class.
+    player.Player.containers = (updateable, drawable)
+    asteroid.Asteroid.containers = (updateable, drawable, asteroids)
+    asteroidfield.AsteroidField.containers = (updateable)
+
     # x/y variables set to set the player sprite middle of the screen on start.
     player_sprite = player.Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
+    asteroidfield_init = asteroidfield.AsteroidField()
     game_clock = pygame.time.Clock()
     dt = 0
 
@@ -23,8 +35,9 @@ def main():
             
         screen.fill("black")
 
-        player_sprite.update(dt)
-        player_sprite.draw(screen)
+        updateable.update(dt)
+        for d in drawable:
+            d.draw(screen)
         
 
         pygame.display.flip()
